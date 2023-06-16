@@ -8,7 +8,7 @@ function powerdrop($option)
     if ($option -eq "receive")
     {
         $port = 1337
-        $localIP = (Get-NetIPAddress | Where-Object {$_.AddressFamily -eq "IPv4" -and $_.PrefixOrigin -eq "Manual"}).IPAddress
+        $localIP = (Get-NetIPAddress | Where-Object {$_.AddressFamily -eq "IPv4" -and $_.InterfaceAlias -and $_.PrefixOrigin -eq "Dhcp"}).IPAddress
         $listener = New-Object System.Net.HttpListener
         $hostAddr = "http://" + $localIP + ":" + $port + "/"
         $hostAddr = $hostAddr -replace " ", ""
